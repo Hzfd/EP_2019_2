@@ -3,7 +3,7 @@ import random
 
 
 deck=[2,3,4,5,6,7,8,9,10,11,12,13,14]*4
-cartas = {"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":10,"12":10,"13":10,"14":1}
+cartas = {"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":10,"12":10,"13":10,"14":11}
 
 
 
@@ -11,7 +11,7 @@ cartas = {"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":10,"12":1
 
 game = True
 entrar=input("Este é o BlackJack Insper!!! Deseja entrar na mesa? (s/n): ")
-carteira = float(input("Com quanto dinheiro deseja entrar? "))
+carteira = 100
 print("Carteira: R${0}".format(carteira))
 if entrar=="s":
     rodada = 1
@@ -23,12 +23,12 @@ if entrar=="s":
 
         print("rodada:{0}".format(rodada))
         aposta_l=[]
-        aposta = float(input("Digite o quanto quer apostar: "))
+        aposta = input("Digite o quanto quer apostar: ")
 
         if aposta=="fim":
             print("Foi bom jogar com você, volte sempre!!!")
             break
-
+        aposta = float(aposta)
         #Feature 1
         while aposta>carteira:
             print("Você não pode apostar mais dinheiro do que tem, aposte um valor adequado")
@@ -96,6 +96,7 @@ if entrar=="s":
                 valor_2_pc = cartas["{0}".format(segunda_carta_pc)]
                 recebe_valores_pc.append(valor_2_pc)
 
+                #IA sorteia cartas para si
                 while sum(recebe_valores_pc)<17:
 
                     primeira_carta_pc = random.randint(2,14)
@@ -115,7 +116,7 @@ if entrar=="s":
                 print("Soma Cartas IA:{0}".format(sum(recebe_valores_pc)))
                 print("Soma das suas cartas: {0}".format(sum(recebe_valores)))
 
-            
+                #se a IA nao fizer um BlackJack
                 if sum(recebe_valores_pc)<21:
                     p2 = str(input("Deseja parar com essas cartas?(s/n): "))
 
@@ -141,6 +142,11 @@ if entrar=="s":
                         valor_1 = cartas["{0}".format(primeira_carta)]
                         recebe_valores.append(valor_1)
                         print("Sua soma: {0}" .format(sum(recebe_valores)))
+
+                        if sum(recebe_valores)>21:
+                            for a in range(len(recebe_valores)):
+                                if recebe_valores[a] == 11:
+                                    recebe_valores[a] = 1
 
                         if sum(recebe_valores)>21:
                             print("Você estourou os 21 pontos, mais sorte na próxima!!!")
