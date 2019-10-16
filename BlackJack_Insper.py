@@ -3,7 +3,7 @@ import random
 
 
 deck=[2,3,4,5,6,7,8,9,10,11,12,13,14]*4
-cartas = {"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":10,"12":10,"13":10,"14":1}
+cartas = {"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":10,"12":10,"13":10,"14":11}
 
 
 
@@ -11,7 +11,7 @@ cartas = {"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":10,"12":1
 
 game = True
 entrar=input("Este é o BlackJack Insper!!! Deseja entrar na mesa? (s/n): ")
-carteira = float(input("Com quanto dinheiro deseja entrar? "))
+carteira = 100
 print("Carteira: R${0}".format(carteira))
 if entrar=="s":
     rodada = 1
@@ -23,12 +23,13 @@ if entrar=="s":
 
         print("rodada:{0}".format(rodada))
         aposta_l=[]
-        aposta = float(input("Digite o quanto quer apostar: "))
+        aposta = input("Digite o quanto quer apostar: ")
 
         if aposta=="fim":
             print("Foi bom jogar com você, volte sempre!!!")
             break
-
+        
+        aposta=float(aposta)
         #Feature 1
         while aposta>carteira:
             print("Você não pode apostar mais dinheiro do que tem, aposte um valor adequado")
@@ -72,16 +73,19 @@ if entrar=="s":
 
                 if sum(recebe_valores)>sum(recebe_valores_pc):
                     print("Você chegou mais próximo que a IA, ganhou!!!")
+                    print ("Soma IA: {0} ".format(sum(recebe_valores_pc)))
                     ganho =  sum(aposta_l)*2
                     carteira+=ganho
                     print("Carteira: R${0}".format(carteira))
 
                 elif sum(recebe_valores_pc)>sum(recebe_valores):
                     print("Perdeu!!! A IA chegou mais proximo de um BlackJack que você, mais sorte na próxima vez")
+                    print ("Soma IA: {0} ".format(sum(recebe_valores_pc)))
                     print("Carteira: R${0}".format(carteira))
                 
                 elif sum(recebe_valores)==sum(recebe_valores_pc):
                     print("Você empatou com a IA!!! Mais sorte na proxima vez")
+                    print ("Soma IA: {0} ".format(sum(recebe_valores_pc)))
                     carteira+=sum(aposta_l)
                     print("Carteira: R${0}".format(carteira))
                 
@@ -104,6 +108,7 @@ if entrar=="s":
 
                     if sum(recebe_valores_pc)>21:
                         print("A IA estourou os 21 pontos!!! Você ganhou!!!")
+                        print ("Soma IA: {0} ".format(sum(recebe_valores_pc)))
                         ganho = sum(aposta_l)+sum(aposta_l)
                         carteira += ganho 
                         print("Carteira: R$ {0}".format(carteira))
@@ -122,6 +127,8 @@ if entrar=="s":
                     if p2 == "s":
                         if sum(recebe_valores)>sum(recebe_valores_pc):
                             print("Parabens!!! Você ganhou da IA, muito bem!!!")
+                            print ("Soma IA: {0} ".format(sum(recebe_valores_pc)))
+                            print ("Soma IA: {0} ".format(sum(recebe_valores_pc)))
                             ganho = sum(aposta_l)*2
                             carteira+=ganho
                             print("Carteira: R$ {0}".format(carteira))
@@ -133,6 +140,7 @@ if entrar=="s":
                         
                         else:
                             print("Você perdeu da IA!!! Mais sorte na próxima!")
+                            print ("Soma IA: {0} ".format(sum(recebe_valores_pc)))
                             print("Carteira: R$ {0}".format(carteira))
 
                     elif p2 == "n":
@@ -142,8 +150,15 @@ if entrar=="s":
                         recebe_valores.append(valor_1)
                         print("Sua soma: {0}" .format(sum(recebe_valores)))
 
+                        #regra do Ás:
+                        if sum(recebe_valores)>21:
+                            for a in range(len(recebe_valores)):
+                                if recebe_valores[a]==11:
+                                    recebe_valores[a]=1
+
                         if sum(recebe_valores)>21:
                             print("Você estourou os 21 pontos, mais sorte na próxima!!!")
+                            print ("Soma IA: {0} ".format(sum(recebe_valores_pc)))
                             print("Carteira: R$ {0}".format(carteira))
                             p3 = "n"
 
@@ -158,6 +173,7 @@ if entrar=="s":
 
                             if sum(recebe_valores)>21:
                                 print("Você estourou os 21 pontos, mais sorte na próxima!!!")
+                                print ("Soma IA: {0} ".format(sum(recebe_valores_pc)))
                                 print("Carteira: R$ {0}".format(carteira))
                                 p3 = "n"
 
@@ -166,12 +182,14 @@ if entrar=="s":
                                 
                         if sum(recebe_valores)>sum(recebe_valores_pc) and sum(recebe_valores)<21:
                             print("PARABÉNS você ganhou da IA!!!!")
-                            ganho = sum(aposta_l)+sum(aposta_l)*1.5
+                            print ("Soma IA: {0} ".format(sum(recebe_valores_pc)))
+                            ganho = sum(aposta_l)*2
                             carteira+=ganho 
                             print("Carteira: R$ {0}".format(carteira))
                         
                         elif sum(recebe_valores)<sum(recebe_valores_pc) and sum(recebe_valores)<21:
                             print("Você perdeu!!! Mais sorte na próxima tentativa ")
+                            print ("Soma IA: {0} ".format(sum(recebe_valores_pc)))
                             print("Carteira: R$ {0}".format(carteira))
 
                         elif  sum(recebe_valores)==sum(recebe_valores_pc):
