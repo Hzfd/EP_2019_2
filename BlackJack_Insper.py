@@ -11,7 +11,7 @@ cartas = {"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":10,"12":1
 
 game = True
 entrar=input("Este é o BlackJack Insper!!! Deseja entrar na mesa? (s/n): ")
-carteira = 100
+carteira = float(input("Com quanto dinheiro deseja entrar? "))
 print("Carteira: R${0}".format(carteira))
 if entrar=="s":
     rodada = 1
