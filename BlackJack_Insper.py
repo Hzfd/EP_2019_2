@@ -43,31 +43,10 @@ if entrar=="s":
 
         segunda_carta = random.randint(2,14)
 
-        if primeira_carta == 14:
-            az1 = random.randint(0,1)
-            if az1==0:
-                valor_1=1
-                recebe_valores.append(valor_1)
-            
-            else:
-                valor_1=11
-                recebe_valores.append(valor_1)
-        
-        elif segunda_carta == 14:
-            az2 = random.randint(0,1)
-            if az2==0:
-                valor_2=1
-                recebe_valores.append(valor_2)
-            
-            else:
-                valor_2=11
-                recebe_valores.append(valor_2)
-
-        else:
-            valor_1 = cartas["{0}".format(primeira_carta)]
-            valor_2 = cartas["{0}".format(segunda_carta)]
-            recebe_valores.append(valor_1)
-            recebe_valores.append(valor_2)
+        valor_1 = cartas["{0}".format(primeira_carta)]
+        valor_2 = cartas["{0}".format(segunda_carta)]
+        recebe_valores.append(valor_1)
+        recebe_valores.append(valor_2)
 
         print ("Valor das suas Cartas: ",recebe_valores)
   
