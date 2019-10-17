@@ -1,4 +1,8 @@
 #BlackJack_Insper
+
+#NOME:
+#   HELIO ZAIA
+#   THIAGO PEGORER
 import random
 
 
